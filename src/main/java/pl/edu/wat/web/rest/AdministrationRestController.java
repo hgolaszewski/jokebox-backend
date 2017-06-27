@@ -1,4 +1,4 @@
-package pl.edu.wat.controller;
+package pl.edu.wat.web.rest;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.wat.component.Crawler;
+import pl.edu.wat.service.JokeProvider;
 import pl.edu.wat.service.interfaces.JokeService;
 
 /**
@@ -22,8 +22,10 @@ import pl.edu.wat.service.interfaces.JokeService;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AdministrationRestController {
 
-    Crawler crawler;
+    JokeProvider crawler;
     JokeService jokeService;
+
+
 
     @PatchMapping(value = "/filldb", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity fillDatabase(){

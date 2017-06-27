@@ -1,4 +1,4 @@
-package pl.edu.wat.component;
+package pl.edu.wat.service;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -20,10 +20,17 @@ import java.util.List;
 /**
  * Created by Hubert on 16.06.2017.
  */
+
+/**
+ * There is Service to provide jokes form third sites.
+ *
+ * TODO: methods which provide filling database by category etc.
+ * TODO: also need to be created interface.
+ */
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PUBLIC, onConstructor = @__(@Autowired))
-public class Crawler {
+public class JokeProvider {
 
     CategoryService categoryService;
     JokeService jokeService;

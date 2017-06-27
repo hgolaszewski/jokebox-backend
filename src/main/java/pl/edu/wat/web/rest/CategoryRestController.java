@@ -1,4 +1,4 @@
-package pl.edu.wat.controller;
+package pl.edu.wat.web.rest;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
