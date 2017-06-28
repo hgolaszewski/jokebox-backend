@@ -1,7 +1,7 @@
 package pl.edu.wat.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.edu.wat.model.Category;
+import pl.edu.wat.domain.Category;
 
 import java.util.Optional;
 

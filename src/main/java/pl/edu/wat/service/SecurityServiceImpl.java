@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.wat.service.interfaces.SecurityService;
 import pl.edu.wat.web.rest.errors.AdminAlreadyAuthenticatedException;
 import pl.edu.wat.web.rest.errors.AuthenticateException;
-import pl.edu.wat.web.rest.viewModel.Token;
+import pl.edu.wat.dto.Token;
 
 import javax.transaction.Transactional;
 import java.math.BigInteger;

@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.wat.dto.SimpleCategoryDtoInput;
-import pl.edu.wat.dto.SimpleJokeDtoInput;
-import pl.edu.wat.model.Category;
-import pl.edu.wat.model.Joke;
+import pl.edu.wat.dto.SimpleCategoryInputDto;
+import pl.edu.wat.dto.SimpleJokeInputDto;
+import pl.edu.wat.domain.Category;
+import pl.edu.wat.domain.Joke;
 import pl.edu.wat.service.JokeProvider;
 import pl.edu.wat.service.interfaces.CategoryService;
 import pl.edu.wat.service.interfaces.JokeService;
 import pl.edu.wat.service.interfaces.SecurityService;
-import pl.edu.wat.web.rest.viewModel.LoginPasswordVM;
-import pl.edu.wat.web.rest.viewModel.Token;
+import pl.edu.wat.dto.LoginPasswordVM;
+import pl.edu.wat.dto.Token;
 
 /**
  * Created by Hubert on 25.06.2017.
@@ -25,7 +25,7 @@ import pl.edu.wat.web.rest.viewModel.Token;
 @RequestMapping("/admin")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class AdministrationRestController {
+public class AdminRestController {
 
     JokeProvider jokeProvider;
     JokeService jokeService;
@@ -46,9 +46,9 @@ public class AdministrationRestController {
     }
 
     @PostMapping(value = "/category", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Category> addCategory(@RequestBody SimpleCategoryDtoInput simpleCategoryDtoInput){
-        securityService.authenticateToken(simpleCategoryDtoInput.getToken());
-        return ResponseEntity.ok(categoryService.addCategory(simpleCategoryDtoInput));
+    public ResponseEntity<Category> addCategory(@RequestBody SimpleCategoryInputDto simpleCategoryInputDto){
+        securityService.authenticateToken(simpleCategoryInputDto.getToken());
+        return ResponseEntity.ok(categoryService.addCategory(simpleCategoryInputDto));
     }
 
     @DeleteMapping(value = "/category/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -58,9 +58,9 @@ public class AdministrationRestController {
     }
 
     @PostMapping(value = "/joke", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Joke> addJoke(@RequestBody SimpleJokeDtoInput simpleJokeDtoInput){
-        securityService.authenticateToken(simpleJokeDtoInput.getToken());
-        return ResponseEntity.ok(jokeService.addSimpleJoke(simpleJokeDtoInput));
+    public ResponseEntity<Joke> addJoke(@RequestBody SimpleJokeInputDto simpleJokeInputDto){
+        securityService.authenticateToken(simpleJokeInputDto.getToken());
+        return ResponseEntity.ok(jokeService.addSimpleJoke(simpleJokeInputDto));
     }
 
     @DeleteMapping(value = "/joke/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

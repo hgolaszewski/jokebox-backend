@@ -1,12 +1,11 @@
 package pl.edu.wat.service;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.wat.dto.SimpleCategoryDto;
-import pl.edu.wat.dto.SimpleCategoryDtoInput;
-import pl.edu.wat.model.Category;
+import pl.edu.wat.dto.SimpleCategoryInputDto;
+import pl.edu.wat.domain.Category;
 import pl.edu.wat.repository.CategoryRepository;
 import pl.edu.wat.service.interfaces.CategoryService;
 import pl.edu.wat.web.rest.errors.NoSuchCategoryException;
@@ -37,14 +36,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category addCategory(SimpleCategoryDtoInput simpleCategoryDtoInput) {
-        Category category = categoryRepository.findOneByName(simpleCategoryDtoInput.getName()).orElse(null);
+    public Category addCategory(SimpleCategoryInputDto simpleCategoryInputDto) {
+        Category category = categoryRepository.findOneByName(simpleCategoryInputDto.getName()).orElse(null);
         if (category != null){
             throw new IllegalArgumentException();
         }
-        category = new Category(simpleCategoryDtoInput.getName(),
-                simpleCategoryDtoInput.getRequestparam(),
-                simpleCategoryDtoInput.getAddress());
+        category = new Category(simpleCategoryInputDto.getName(),
+                simpleCategoryInputDto.getRequestparam(),
+                simpleCategoryInputDto.getAddress());
         category = categoryRepository.save(category);
         return category;
     }

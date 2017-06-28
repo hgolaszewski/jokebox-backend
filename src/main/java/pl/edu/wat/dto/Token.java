@@ -1,4 +1,4 @@
-package pl.edu.wat.web.rest.viewModel;
+package pl.edu.wat.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -13,13 +13,11 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class LoginPasswordVM {
+public class Token {
 
-    String login;
-    String password;
+    String value;
 
-    public LoginPasswordVM(String login, String password){
-        this.login = login;
-        this.password = password;
+    public Token(String value){
+        this.value = value;
     }
 }

@@ -1,6 +1,6 @@
 package pl.edu.wat.service.interfaces;
 
-import pl.edu.wat.web.rest.viewModel.Token;
+import pl.edu.wat.dto.Token;
 
 /**
  * Created by Adam on 28.06.2017.
