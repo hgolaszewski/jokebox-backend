@@ -35,7 +35,7 @@ public class JokeProvider {
     CategoryService categoryService;
     JokeService jokeService;
 
-    public void init() {
+    public void provide() {
 
         List<Category> categories = categoryService.listAllCategory();
 

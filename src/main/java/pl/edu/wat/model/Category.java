@@ -32,4 +32,9 @@ public class Category {
     @Column(nullable = false)
     String address;
 
+    public Category(String name, String requestparam, String address) {
+        this.name = name;
+        this.requestparam = requestparam;
+        this.address = address;
+    }
 }

@@ -8,11 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.wat.dto.SimpleCategoryDtoInput;
-import pl.edu.wat.dto.SimpleJokeDto;
 import pl.edu.wat.dto.SimpleJokeDtoInput;
 import pl.edu.wat.model.Category;
 import pl.edu.wat.model.Joke;
-import pl.edu.wat.repository.CategoryRepository;
 import pl.edu.wat.service.JokeProvider;
 import pl.edu.wat.service.interfaces.CategoryService;
 import pl.edu.wat.service.interfaces.JokeService;
@@ -53,6 +51,12 @@ public class AdministrationRestController {
         return ResponseEntity.ok(categoryService.addCategory(simpleCategoryDtoInput));
     }
 
+    @DeleteMapping(value = "/category/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Category> deleteCategory(@PathVariable int id, @RequestBody Token token){
+        securityService.authenticateToken(token);
+        return ResponseEntity.ok(categoryService.deleteCategory(id));
+    }
+
     @PostMapping(value = "/joke", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Joke> addJoke(@RequestBody SimpleJokeDtoInput simpleJokeDtoInput){
         securityService.authenticateToken(simpleJokeDtoInput.getToken());
@@ -68,7 +72,7 @@ public class AdministrationRestController {
     @PatchMapping(value = "/resetDataBase", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity fillDatabase(@RequestBody Token token){
         cleanJokes(token);
-        jokeProvider.init();
+        jokeProvider.provide();
         return ResponseEntity.status(200).build();
     }
 

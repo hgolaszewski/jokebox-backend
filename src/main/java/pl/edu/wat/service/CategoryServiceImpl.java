@@ -1,5 +1,6 @@
 package pl.edu.wat.service;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,16 +38,24 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category addCategory(SimpleCategoryDtoInput simpleCategoryDtoInput) {
-        return null;
+        Category category = categoryRepository.findOneByName(simpleCategoryDtoInput.getName()).orElse(null);
+        if (category != null){
+            throw new IllegalArgumentException();
+        }
+        category = new Category(simpleCategoryDtoInput.getName(),
+                simpleCategoryDtoInput.getRequestparam(),
+                simpleCategoryDtoInput.getAddress());
+        category = categoryRepository.save(category);
+        return category;
     }
 
     @Override
     public Category deleteCategory(int id) {
-        Category category = categoryRepository.findOne((long) id);
+        Category category = categoryRepository.findOne(id);
         if (category == null){
             throw new NoSuchCategoryException();
         }
-        categoryRepository.delete((long) id);
+        categoryRepository.delete(id);
         return category;
     }
 }

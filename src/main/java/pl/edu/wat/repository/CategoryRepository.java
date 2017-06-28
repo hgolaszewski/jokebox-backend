@@ -8,6 +8,6 @@ import java.util.Optional;
 /**
  * Created by Adam on 27.06.2017.
  */
-public interface CategoryRepository extends JpaRepository<Category,Long> {
+public interface CategoryRepository extends JpaRepository<Category,Integer> {
     Optional<Category> findOneByName(String categoryName);
 }
