@@ -8,8 +8,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.edu.wat.model.Category;
-import pl.edu.wat.model.Joke;
+import pl.edu.wat.domain.Category;
+import pl.edu.wat.domain.Joke;
 import pl.edu.wat.service.interfaces.JokeService;
 import pl.edu.wat.service.interfaces.CategoryService;
 
@@ -35,7 +35,7 @@ public class JokeProvider {
     CategoryService categoryService;
     JokeService jokeService;
 
-    public void init() {
+    public void provide() {
 
         List<Category> categories = categoryService.listAllCategory();
 

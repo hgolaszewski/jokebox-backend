@@ -1,6 +1,5 @@
 package pl.edu.wat.service;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -9,8 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.wat.dto.SimpleJokeDto;
-import pl.edu.wat.dto.SimpleJokeDtoInput;
-import pl.edu.wat.model.Joke;
+import pl.edu.wat.dto.SimpleJokeInputDto;
+import pl.edu.wat.domain.Joke;
 import pl.edu.wat.repository.CategoryRepository;
 import pl.edu.wat.repository.JokeRepository;
 import pl.edu.wat.service.interfaces.JokeService;
@@ -21,7 +20,6 @@ import pl.edu.wat.web.rest.errors.NoSuchJokeException;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -40,17 +38,17 @@ public class JokeServiceImpl implements JokeService {
 
 
     @Override
-    public Joke addSimpleJoke(SimpleJokeDtoInput simpleJokeDtoInput) {
+    public Joke addSimpleJoke(SimpleJokeInputDto simpleJokeInputDto) {
         log.debug("Request to add joke by form");
-        if( jokeRepository.findAllByCategoryName(simpleJokeDtoInput.getCategoryName())
+        if( jokeRepository.findAllByCategoryName(simpleJokeInputDto.getCategoryName())
                 .stream()
-                .map(joke -> StringUtils.similarity(simpleJokeDtoInput.getJokeContent(), joke.getContent()))
+                .map(joke -> StringUtils.similarity(simpleJokeInputDto.getJokeContent(), joke.getContent()))
                 .anyMatch(similarity -> 1 == similarity.compareTo(0.85))){
             throw new DuplicateJokeExeption();
         }
-        return categoryRepository.findOneByName(simpleJokeDtoInput.getCategoryName())
+        return categoryRepository.findOneByName(simpleJokeInputDto.getCategoryName())
                 .map(category -> {
-                    Joke joke = new Joke(simpleJokeDtoInput.getJokeContent(), category);
+                    Joke joke = new Joke(simpleJokeInputDto.getJokeContent(), category);
                     jokeRepository.save(joke);
                     return joke;
                 }).orElseThrow(() -> new NoSuchCategoryException());

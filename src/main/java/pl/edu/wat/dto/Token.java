@@ -1,4 +1,4 @@
-package pl.edu.wat.web.rest.viewModel;
+package pl.edu.wat.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

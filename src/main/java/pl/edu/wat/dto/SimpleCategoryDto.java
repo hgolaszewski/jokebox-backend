@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import pl.edu.wat.model.Category;
+import pl.edu.wat.domain.Category;
 
 import java.io.Serializable;
 

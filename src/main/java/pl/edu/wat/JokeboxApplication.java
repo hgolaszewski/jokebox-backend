@@ -15,7 +15,7 @@ public class JokeboxApplication {
 
 	@PostConstruct
 	public void initializeDatabase(){
-		crawler.init();
+		crawler.provide();
 	}*/
 
 	public static void main(String[] args) {

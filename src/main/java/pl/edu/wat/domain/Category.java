@@ -1,4 +1,4 @@
-package pl.edu.wat.model;
+package pl.edu.wat.domain;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -32,4 +32,9 @@ public class Category {
     @Column(nullable = false)
     String address;
 
+    public Category(String name, String requestparam, String address) {
+        this.name = name;
+        this.requestparam = requestparam;
+        this.address = address;
+    }
 }
