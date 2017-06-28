@@ -7,11 +7,12 @@ import pl.edu.wat.model.Category;
 import pl.edu.wat.model.Joke;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Adam on 27.06.2017.
  */
-public interface JokeRepository extends JpaRepository<Joke, Long> {
+public interface JokeRepository extends JpaRepository<Joke, Integer> {
     List<Joke> findAllByCategoryRequestparam(String categoryName);
     Page<Joke> findAllByCategoryRequestparam(Pageable pageable, String categoryName);
 }

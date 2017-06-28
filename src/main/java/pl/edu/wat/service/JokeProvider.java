@@ -53,9 +53,7 @@ public class JokeProvider {
                         .filter(joke -> !joke.contains("Stały"))
                         .filter(joke -> joke.length() > 75)
                         .forEach(content -> {
-                            Joke joke = new Joke();
-                            joke.setContent(content);
-                            joke.setCategory(category);
+                            Joke joke = new Joke(content,category);
                             jokeService.addJoke(joke);
                         });
 

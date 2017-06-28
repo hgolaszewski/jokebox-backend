@@ -40,3 +40,8 @@ INSERT INTO Category (id, name, requestparam, address) VALUES (13, 'Naukowcy', '
 INSERT INTO Category (id, name, requestparam, address) VALUES (14, 'Puchatek', 'puchatek', 'http://kubus-puchatek.dowcipy.pl');
 INSERT INTO Category (id, name, requestparam, address) VALUES (15, 'Stalin', 'stalin', 'http://stalin.dowcipy.pl');
 INSERT INTO Category (id, name, requestparam, address) VALUES (16, 'Zoo', 'zoo', 'http://zoo.dowcipy.pl');
+
+--changset adam:5
+
+ALTER TABLE Joke ADD like_number INT;
+ALTER TABLE Joke ADD unlike_number INT;

@@ -6,10 +6,12 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.edu.wat.dto.SimpleJokeDto;
+import pl.edu.wat.dto.SimpleJokeDtoInput;
+import pl.edu.wat.model.Category;
+import pl.edu.wat.model.Joke;
+import pl.edu.wat.repository.CategoryRepository;
 import pl.edu.wat.service.JokeProvider;
 import pl.edu.wat.service.interfaces.JokeService;
 
@@ -22,15 +24,18 @@ import pl.edu.wat.service.interfaces.JokeService;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AdministrationRestController {
 
-    JokeProvider crawler;
+    JokeProvider jokeProvider;
     JokeService jokeService;
 
+    @PostMapping(value = "/addjoke", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Joke> addJoke(@RequestBody SimpleJokeDtoInput simpleJokeDtoInput){
+        return ResponseEntity.ok().body(jokeService.addSimpleJoke(simpleJokeDtoInput));
+    }
 
-
-    @PatchMapping(value = "/filldb", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "/resetDataBase", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity fillDatabase(){
         cleanJokes();
-        crawler.init();
+        jokeProvider.init();
         return ResponseEntity.status(200).build();
     }
 

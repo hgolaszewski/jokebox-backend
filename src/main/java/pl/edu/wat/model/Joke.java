@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Joke {
 
     @Id
@@ -26,5 +25,18 @@ public class Joke {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = false)
     Category category;
+
+    @Column(nullable = false)
+    int likeNumber;
+
+    @Column(nullable = false)
+    int unlikeNumber;
+
+    public Joke(String content, Category category) {
+        this.content = content;
+        this.category = category;
+        likeNumber = 0;
+        unlikeNumber = 0;
+    }
 
 }

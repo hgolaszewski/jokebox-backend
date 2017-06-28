@@ -6,10 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.wat.dto.SimpleJokeDto;
 import pl.edu.wat.service.interfaces.JokeService;
 
@@ -32,9 +29,9 @@ public class JokeRestController {
         return ResponseEntity.ok(jokes);
     }
 
-    @GetMapping(value = "/test/{category}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<SimpleJokeDto>> pageJokeByCategory(@PathVariable String category){
-        return ResponseEntity.ok(jokeService.findAllByCategoryName(category));
+    @PatchMapping(value = "/{id}/{likeOrUnlike}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<SimpleJokeDto> markJoke (@PathVariable int id, @PathVariable String likeOrUnlike){
+        return ResponseEntity.ok(jokeService.likeOrUnlikeJoke(id,likeOrUnlike));
     }
 
 }
