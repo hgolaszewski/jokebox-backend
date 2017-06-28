@@ -1,5 +1,6 @@
 package pl.edu.wat.service.interfaces;
 
+import pl.edu.wat.dto.SimpleCategoryDto;
 import pl.edu.wat.model.Category;
 
 import java.util.List;
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface CategoryService {
     List<Category> listAllCategory();
+    List<SimpleCategoryDto> findAllCategory();
 }

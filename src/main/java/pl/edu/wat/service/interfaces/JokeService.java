@@ -1,9 +1,6 @@
 package pl.edu.wat.service.interfaces;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import pl.edu.wat.dto.SimpleJokeDto;
-import pl.edu.wat.model.Category;
 import pl.edu.wat.model.Joke;
 
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
  */
 public interface JokeService {
     void addJoke(Joke joke);
-    List<Joke> listJokeByCategory(String categoryName);
+    List<SimpleJokeDto> listJokeByCategory(String categoryName);
     void cleanJokes();
     List<SimpleJokeDto> findAllByCategoryName(String categoryName);
 }

@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.edu.wat.dto.SimpleJokeDto;
-import pl.edu.wat.model.Category;
 import pl.edu.wat.model.Joke;
 import pl.edu.wat.repository.JokeRepository;
 import pl.edu.wat.service.interfaces.JokeService;
@@ -34,9 +31,12 @@ public class JokeServiceImpl implements JokeService {
     }
 
     @Override
-    public List<Joke> listJokeByCategory(String categoryName) {
+    public List<SimpleJokeDto> listJokeByCategory(String categoryName) {
         log.debug("Request to list all Jokes by category (list)");
-        return jokeRepository.findAllByCategoryRequestparam(categoryName);
+        return jokeRepository.findAllByCategoryRequestparam(categoryName)
+                .stream()
+                .map(joke -> new SimpleJokeDto(joke))
+                .collect(Collectors.toList());
     }
 
     @Override

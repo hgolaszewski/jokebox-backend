@@ -19,9 +19,11 @@ import java.io.Serializable;
 public class SimpleCategoryDto implements Serializable {
 
     String name;
+    String requestparam;
 
     public SimpleCategoryDto(Category category){
         this.name = category.getName();
+        this.requestparam = category.getRequestparam();
     }
 
 }
