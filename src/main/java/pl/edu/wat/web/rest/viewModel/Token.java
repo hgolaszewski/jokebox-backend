@@ -1,9 +1,6 @@
 package pl.edu.wat.web.rest.viewModel;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 /**
@@ -12,12 +9,10 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Token {
 
     String value;
 
-    public Token(String value){
-        this.value = value;
-    }
 }
