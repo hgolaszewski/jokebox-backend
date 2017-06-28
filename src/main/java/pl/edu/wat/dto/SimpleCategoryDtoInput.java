@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import pl.edu.wat.model.Joke;
 import pl.edu.wat.web.rest.viewModel.Token;
 
 /**
@@ -15,15 +14,17 @@ import pl.edu.wat.web.rest.viewModel.Token;
 @Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SimpleJokeDtoInput {
+public class SimpleCategoryDtoInput {
 
-    String jokeContent;
-    String categoryName;
+    String name;
+    String requestparam;
+    String address;
     Token token;
 
-    public SimpleJokeDtoInput(String jokeContent, String categoryName, Token token){
-        this.jokeContent = jokeContent;
-        this.categoryName = categoryName;
+    public SimpleCategoryDtoInput(String name, String requestparam, String address, Token token){
+        this.name = name;
+        this.requestparam = requestparam;
+        this.address = address;
         this.token = token;
     }
 }

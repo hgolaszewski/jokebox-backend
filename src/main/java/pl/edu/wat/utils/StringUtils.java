@@ -17,7 +17,6 @@ public class StringUtils {
     return (longerLength - StringUtils.getLevenshteinDistance(longer, shorter)) /
                                (double) longerLength; */
         return (longerLength - distance(longer, shorter)) / (double) longerLength;
-
     }
 
     /**

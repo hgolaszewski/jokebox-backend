@@ -29,7 +29,7 @@ public class JokeRestController {
         return ResponseEntity.ok(jokes);
     }
 
-    @PatchMapping(value = "/{id}/{likeOrUnlike}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}/{likeOrUnlike}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<SimpleJokeDto> markJoke (@PathVariable int id, @PathVariable String likeOrUnlike){
         return ResponseEntity.ok(jokeService.likeOrUnlikeJoke(id,likeOrUnlike));
     }

@@ -1,5 +1,6 @@
 package pl.edu.wat.service;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -13,6 +14,8 @@ import pl.edu.wat.model.Joke;
 import pl.edu.wat.repository.CategoryRepository;
 import pl.edu.wat.repository.JokeRepository;
 import pl.edu.wat.service.interfaces.JokeService;
+import pl.edu.wat.utils.StringUtils;
+import pl.edu.wat.web.rest.errors.DuplicateJokeExeption;
 import pl.edu.wat.web.rest.errors.NoSuchCategoryException;
 import pl.edu.wat.web.rest.errors.NoSuchJokeException;
 
@@ -39,19 +42,35 @@ public class JokeServiceImpl implements JokeService {
     @Override
     public Joke addSimpleJoke(SimpleJokeDtoInput simpleJokeDtoInput) {
         log.debug("Request to add joke by form");
+        if( jokeRepository.findAllByCategoryName(simpleJokeDtoInput.getCategoryName())
+                .stream()
+                .map(joke -> StringUtils.similarity(simpleJokeDtoInput.getJokeContent(), joke.getContent()))
+                .anyMatch(similarity -> 1 == similarity.compareTo(0.85))){
+            throw new DuplicateJokeExeption();
+        }
         return categoryRepository.findOneByName(simpleJokeDtoInput.getCategoryName())
                 .map(category -> {
-                    Joke joke = new Joke(simpleJokeDtoInput.getJokeContent(),
-                            category);
+                    Joke joke = new Joke(simpleJokeDtoInput.getJokeContent(), category);
                     jokeRepository.save(joke);
                     return joke;
                 }).orElseThrow(() -> new NoSuchCategoryException());
     }
 
+
     @Override
     public void addJoke(Joke joke) {
         log.debug("Request to add joke");
         jokeRepository.save(joke);
+    }
+
+    @Override
+    public Joke deleteJoke(int id) {
+        Joke joke = jokeRepository.findOne(id);
+        if(joke == null) {
+            throw new NoSuchJokeException();
+        }
+        jokeRepository.delete(id);
+        return joke;
     }
 
     @Override
@@ -71,6 +90,7 @@ public class JokeServiceImpl implements JokeService {
 
     @Override
     public SimpleJokeDto likeOrUnlikeJoke(int id, String likeOrUnlike) {
+        log.debug("Request to like joke");
         Joke joke = jokeRepository.findOne(id);
         if (joke == null){
             throw new NoSuchJokeException();

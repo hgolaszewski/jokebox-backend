@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface JokeService {
     Joke addSimpleJoke(SimpleJokeDtoInput simpleJokeDtoInput);
     void addJoke(Joke joke);
+    Joke deleteJoke(int id);
     List<SimpleJokeDto> listJokeByCategory(String categoryName);
     void cleanJokes();
     SimpleJokeDto likeOrUnlikeJoke(int id, String likeOrUnlike);
