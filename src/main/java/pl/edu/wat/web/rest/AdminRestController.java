@@ -44,6 +44,12 @@ public class AdminRestController {
         return ResponseEntity.ok(new OKResponseDto(new Date(), "SUCCESS"));
     }
 
+    @PostMapping(value = "/logout2", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<OKResponseDto> logOut(@RequestBody LoginPasswordVM loginPasswordVM){
+        securityService.logOut(loginPasswordVM.getLogin(), loginPasswordVM.getPassword());
+        return ResponseEntity.ok(new OKResponseDto(new Date(), "SUCCESS"));
+    }
+
     @PostMapping(value = "/category", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Category> addCategory(@RequestBody SimpleCategoryInputDto simpleCategoryInputDto){
         securityService.authenticateToken(simpleCategoryInputDto.getToken());

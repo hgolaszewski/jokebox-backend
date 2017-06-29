@@ -9,4 +9,5 @@ public interface SecurityService {
     Token authenticate(String user, String password);
     void authenticateToken(Token token);
     void logOut();
+    void logOut(String user, String password);
 }
