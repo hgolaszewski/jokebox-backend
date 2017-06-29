@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +51,7 @@ public class AdminRestController {
         return ResponseEntity.ok(categoryService.addCategory(simpleCategoryInputDto));
     }
 
-    @DeleteMapping(value = "/category/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "/category/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Category> deleteCategory(@PathVariable int id, @RequestBody Token token){
         securityService.authenticateToken(token);
         return ResponseEntity.ok(categoryService.deleteCategory(id));
