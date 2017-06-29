@@ -49,4 +49,11 @@ public class SecurityServiceImpl implements SecurityService {
         currentSessionId = null;
     }
 
+    @Override
+    public void logOut(String user, String password) {
+        if (LOGIN.equals(user) && PASSWORD.equals(password)){
+            currentSessionId = null;
+        }
+    }
+
 }
