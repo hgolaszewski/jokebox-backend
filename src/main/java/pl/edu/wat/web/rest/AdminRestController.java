@@ -15,8 +15,6 @@ import pl.edu.wat.service.interfaces.CategoryService;
 import pl.edu.wat.service.interfaces.JokeService;
 import pl.edu.wat.service.interfaces.SecurityService;
 
-import java.util.Date;
-
 /**
  * Created by Hubert on 29.06.2017.
  */
@@ -41,7 +39,7 @@ public class AdminRestController {
     public ResponseEntity<OKResponseDto> logOut(@RequestBody Token token){
         securityService.authenticateToken(token);
         securityService.logOut();
-        return ResponseEntity.ok(new OKResponseDto(new Date(), "SUCCESS"));
+        return ResponseEntity.ok(new OKResponseDto());
     }
 
     @PostMapping(value = "/category", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -72,7 +70,7 @@ public class AdminRestController {
     public ResponseEntity<OKResponseDto> fillDatabase(@RequestBody Token token){
         cleanJokes(token);
         jokeProvider.provide();
-        return ResponseEntity.ok(new OKResponseDto(new Date(), "SUCCESS"));
+        return ResponseEntity.ok(new OKResponseDto());
 
     }
 
@@ -80,7 +78,7 @@ public class AdminRestController {
     public ResponseEntity<OKResponseDto> cleanJokes(@RequestBody Token token){
         securityService.authenticateToken(token);
         jokeService.cleanJokes();
-        return ResponseEntity.ok(new OKResponseDto(new Date(), "SUCCESS"));
+        return ResponseEntity.ok(new OKResponseDto());
     }
 
 }

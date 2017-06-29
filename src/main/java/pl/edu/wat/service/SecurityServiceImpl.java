@@ -1,10 +1,9 @@
 package pl.edu.wat.service;
 
 import org.springframework.stereotype.Service;
-import pl.edu.wat.service.interfaces.SecurityService;
-import pl.edu.wat.web.rest.errors.AdminAlreadyAuthenticatedException;
-import pl.edu.wat.web.rest.errors.AuthenticateException;
 import pl.edu.wat.dto.Token;
+import pl.edu.wat.service.interfaces.SecurityService;
+import pl.edu.wat.web.rest.errors.AuthenticateException;
 
 import javax.transaction.Transactional;
 import java.math.BigInteger;
@@ -26,9 +25,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public Token authenticate(String user, String password) {
-        if(currentSessionId != null){
-            throw new AdminAlreadyAuthenticatedException();
-        }else if (LOGIN.equals(user) && PASSWORD.equals(password)){
+        if (LOGIN.equals(user) && PASSWORD.equals(password)){
             currentSessionId = nextSessionId();
         } else {
             throw new AuthenticateException();

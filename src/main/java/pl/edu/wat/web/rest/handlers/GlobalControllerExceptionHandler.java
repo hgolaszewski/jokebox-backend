@@ -35,19 +35,19 @@ public class GlobalControllerExceptionHandler {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(value= HttpStatus.BAD_REQUEST, reason="illegal argument")
+    @ResponseStatus(value= HttpStatus.BAD_REQUEST, reason="Illegal argument")
     public void handleIllegalArgumentException() {
         logger.debug("handleIllegalArgumentException");
     }
 
     @ExceptionHandler(AuthenticateException.class)
-    @ResponseStatus(value= HttpStatus.UNAUTHORIZED, reason="wrong login or password or token")
+    @ResponseStatus(value= HttpStatus.UNAUTHORIZED, reason="Wrong login or password or token")
     public void handleAuthenticateException() {
         logger.debug("handleAuthenticateException");
     }
 
-    @ExceptionHandler(AdminAlreadyAuthenticatedException.class)
-    @ResponseStatus(value= HttpStatus.FORBIDDEN, reason="admin already authenticated")
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(value= HttpStatus.FORBIDDEN, reason="Something went wrong")
     public void handleAdminAlreadyAuthenticatedException() {
         logger.debug("handleAdminAlreadyAuthenticatedException");
     }

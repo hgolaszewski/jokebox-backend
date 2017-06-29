@@ -11,10 +11,13 @@ CREATE TABLE Category (
 
 CREATE TABLE Joke (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    category_id INT NOT NULL,
-    content MEDIUMTEXT NOT NULL,
-    CONSTRAINT FOREIGN KEY (category_id) REFERENCES Category(id)
+    category_id INT,
+    content MEDIUMTEXT NOT NULL
 );
+
+ALTER TABLE joke
+    ADD FOREIGN KEY (category_id) REFERENCES Category(id)
+    ON DELETE SET NULL ON UPDATE CASCADE;
 
 --changeset hubert:2
 
@@ -45,3 +48,5 @@ INSERT INTO Category (id, name, requestparam, address) VALUES (16, 'Zoo', 'zoo',
 
 ALTER TABLE Joke ADD like_number INT;
 ALTER TABLE Joke ADD unlike_number INT;
+
+
