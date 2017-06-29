@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SimpleCategoryDto implements Serializable {
+public class SimpleCategoryDto implements Serializable, Comparable {
 
     String name;
     String requestparam;
@@ -26,4 +26,8 @@ public class SimpleCategoryDto implements Serializable {
         this.requestparam = category.getRequestparam();
     }
 
+    @Override
+    public int compareTo(Object o) {
+        return this.getName().compareTo(((SimpleCategoryDto)o).getName());
+    }
 }

@@ -32,6 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findAll()
                 .stream()
                 .map(category -> new SimpleCategoryDto(category))
+                .sorted()
                 .collect(Collectors.toList());
     }
 
