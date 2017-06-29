@@ -19,7 +19,7 @@ public class Joke {
     @GeneratedValue
     int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 2000)
     String content;
 
     @ManyToOne(fetch = FetchType.EAGER)
