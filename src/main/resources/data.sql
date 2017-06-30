@@ -1,23 +1,3 @@
---liquibase formatted sql;
-
---changeset hubert:1
-
-CREATE TABLE Category (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(64) NOT NULL UNIQUE,
-    requestparam VARCHAR(64) NOT NULL UNIQUE,
-    address VARCHAR(255) NOT NULL UNIQUE
-);
-
-CREATE TABLE Joke (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    category_id INT NOT NULL,
-    content MEDIUMTEXT NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES Category(id)
-);
-
---changeset hubert:2
-
 INSERT INTO Category (id, name, requestparam, address) VALUES (1, 'Alkohol', 'alkohol', 'http://alkohol.dowcipy.pl');
 INSERT INTO Category (id, name, requestparam, address) VALUES (2, 'Apteka', 'apteka', 'http://apteka.dowcipy.pl');
 INSERT INTO Category (id, name, requestparam, address) VALUES (3, 'Baca', 'baca', 'http://o-bacy.dowcipy.pl');
@@ -40,8 +20,3 @@ INSERT INTO Category (id, name, requestparam, address) VALUES (13, 'Naukowcy', '
 INSERT INTO Category (id, name, requestparam, address) VALUES (14, 'Puchatek', 'puchatek', 'http://kubus-puchatek.dowcipy.pl');
 INSERT INTO Category (id, name, requestparam, address) VALUES (15, 'Stalin', 'stalin', 'http://stalin.dowcipy.pl');
 INSERT INTO Category (id, name, requestparam, address) VALUES (16, 'Zoo', 'zoo', 'http://zoo.dowcipy.pl');
-
---changset adam:5
-
-ALTER TABLE Joke ADD like_number INT;
-ALTER TABLE Joke ADD unlike_number INT;
